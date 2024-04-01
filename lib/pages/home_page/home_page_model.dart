@@ -10,6 +10,8 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   List<dynamic>? customActionOutput;
   // Stores action output result for [Custom Action - custAct2] action in Button widget.
   String? custActOut;
+  // Stores action output result for [Custom Action - isLoggedIn] action in Button widget.
+  String? isLoggedIn;
 
   @override
   void initState(BuildContext context) {}
