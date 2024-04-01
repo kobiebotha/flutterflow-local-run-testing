@@ -18,7 +18,8 @@ import 'package:powersync/powersync.dart' as powersync;
 **************************************************************/
 
 //STEP 1: Replace this with your PowerSync instance URL. See here for instructions https://docs.powersync.com/integration-guides/supabase-+-powersync#test-everything-using-our-demo-app
-const PowerSyncEndpoint = 'notavalidURL';
+// The URL should look like this: https://12345678901234566.powersync.journeyapps.com
+const PowerSyncEndpoint = 'insertYourURLhere';
 
 //STEP 2: Paste your PowerSync Client Schema here.
 //We recommend generating this from the dashboard using the "Generate client-side schema" action https://docs.powersync.com/usage/tools/powersync-dashboard#actions
@@ -160,14 +161,6 @@ Future initpowersync() async {
       schema: schema, path: await getDatabasePath());
 
   await db.initialize();
-
-  //insert some dummy data
-  final insertResult = await db.execute(
-      'INSERT INTO lists(id, created_at, name, owner_id) VALUES(uuid(), datetime(), ?, ?) RETURNING *',
-      [
-        'Boot sequence test row',
-        Supabase.instance.client.auth.currentSession?.user.id
-      ]);
 
   SupabaseConnector? currentConnector;
 
