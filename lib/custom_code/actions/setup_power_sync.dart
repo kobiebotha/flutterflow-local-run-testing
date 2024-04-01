@@ -1,4 +1,5 @@
 // Automatic FlutterFlow imports
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'index.dart'; // Imports other custom actions
@@ -32,12 +33,19 @@ Future setupPowerSync() async {
         [powersync.Column.text('created_at'), powersync.Column.text('name')])
   ]));
 
-  if (db == null) {
-    db = powersync.PowerSyncDatabase(
-        schema: schema, path: await getDatabasePath());
+  db = powersync.PowerSyncDatabase(
+      schema: schema, path: await getDatabasePath());
 
-    await db.initialize();
-  }
+  await db.initialize();
+
+  //insert some dummy data
+  final insertResult = await db.execute(
+      'INSERT INTO lists(id, created_at, name) VALUES(uuid(), datetime(), ?) RETURNING *',
+      ['Item 11']);
+
+  final insertResult2 = await db.execute(
+      'INSERT INTO lists(id, created_at, name) VALUES(uuid(), datetime(), ?) RETURNING *',
+      ['Item 12']);
 }
 
 Future<String> getDatabasePath() async {

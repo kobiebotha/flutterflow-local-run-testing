@@ -7,7 +7,9 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
 
   final unfocusNode = FocusNode();
   // Stores action output result for [Custom Action - newCustomAction] action in Button widget.
-  List<dynamic>? customOutput;
+  List<dynamic>? customActionOutput;
+  // Stores action output result for [Custom Action - custAct2] action in Button widget.
+  String? custActOut;
 
   @override
   void initState(BuildContext context) {}
