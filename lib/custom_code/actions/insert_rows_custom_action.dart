@@ -14,8 +14,8 @@ const bool kIsWeb = bool.fromEnvironment('dart.library.js_util');
 
 Future insertRowsCustomAction(String field) async {
   final insertResult = await db.execute(
-      'INSERT INTO lists(id, created_at, name) VALUES(uuid(), datetime(), ?) RETURNING *',
-      [field]);
+      'INSERT INTO lists(id, created_at, name, owner_id) VALUES(uuid(), datetime(), ?, ?) RETURNING *',
+      [field, Supabase.instance.client.auth.currentSession?.user.id]);
 
   return;
 }

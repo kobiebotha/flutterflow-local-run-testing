@@ -192,30 +192,34 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 ],
               ),
-              Builder(
-                builder: (context) {
-                  final mylist = _model.customOutput!.toList();
-                  return ListView.builder(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: mylist.length,
-                    itemBuilder: (context, mylistIndex) {
-                      final mylistItem = mylist[mylistIndex];
-                      return Text(
-                        getJsonField(
-                          mylistItem,
-                          r'''$.name''',
-                        ).toString(),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Readex Pro',
-                              letterSpacing: 0.0,
-                            ),
-                      );
-                    },
-                  );
-                },
-              ),
+              if ((_model.customOutput != null &&
+                      (_model.customOutput)!.isNotEmpty) ==
+                  true)
+                Builder(
+                  builder: (context) {
+                    final mylist = _model.customOutput!.toList();
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: mylist.length,
+                      itemBuilder: (context, mylistIndex) {
+                        final mylistItem = mylist[mylistIndex];
+                        return Text(
+                          getJsonField(
+                            mylistItem,
+                            r'''$.name''',
+                          ).toString(),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                        );
+                      },
+                    );
+                  },
+                ),
             ],
           ),
         ),

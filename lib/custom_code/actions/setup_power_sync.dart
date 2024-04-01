@@ -159,8 +159,11 @@ Future setupPowerSync() async {
 
   //insert some dummy data
   final insertResult = await db.execute(
-      'INSERT INTO lists(id, created_at, name) VALUES(uuid(), datetime(), ?) RETURNING *',
-      ['Boot sequence test row']);
+      'INSERT INTO lists(id, created_at, name, owner_id) VALUES(uuid(), datetime(), ?, ?) RETURNING *',
+      [
+        'Boot sequence test row',
+        Supabase.instance.client.auth.currentSession?.user.id
+      ]);
 
   SupabaseConnector? currentConnector;
 
