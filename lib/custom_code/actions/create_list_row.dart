@@ -7,15 +7,8 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import '/custom_code/actions/initps.dart';
-
-import 'package:powersync/powersync.dart' as powersync;
-
 // Set your action name, define your arguments and return parameter,
 // and then add the boilerplate code using the green button on the right!
-Future<String> custAct2() async {
-  final readResult = (await db.get('SELECT count(*) from lists')).toString();
-  var dbPath = await getDatabasePath();
-  //return 'it worked, dbpath = ' + dbPath;
-  return 'read worked, results = ' + readResult;
+Future<void> createListRow(ListsRow newList) async {
+  return;
 }

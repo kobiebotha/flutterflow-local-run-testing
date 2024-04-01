@@ -68,7 +68,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             children: [
               FFButtonWidget(
                 onPressed: () async {
-                  _model.customOutput = await actions.newCustomAction();
+                  _model.customOutput = await actions.readAllLists();
 
                   setState(() {});
                 },
@@ -161,7 +161,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                   FFButtonWidget(
                     onPressed: () async {
-                      await actions.insertRowsCustomAction(
+                      await actions.insertRowCustomAction(
                         _model.textController.text,
                       );
                       setState(() {
@@ -197,7 +197,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   true)
                 Builder(
                   builder: (context) {
-                    final mylist = _model.customOutput!.toList();
+                    final mylist = _model.customOutput
+                            ?.map((e) => e.name)
+                            .toList()
+                            .toList() ??
+                        [];
                     return ListView.builder(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
@@ -206,10 +210,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       itemBuilder: (context, mylistIndex) {
                         final mylistItem = mylist[mylistIndex];
                         return Text(
-                          getJsonField(
-                            mylistItem,
-                            r'''$.name''',
-                          ).toString(),
+                          mylistItem,
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
@@ -220,6 +221,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     );
                   },
                 ),
+              Divider(
+                thickness: 3.0,
+                color: FlutterFlowTheme.of(context).tertiary,
+              ),
             ],
           ),
         ),

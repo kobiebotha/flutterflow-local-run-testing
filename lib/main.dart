@@ -22,7 +22,7 @@ void main() async {
   await FlutterFlowTheme.initialize();
 
   // Start final custom actions code
-  await actions.setupPowerSync();
+  await actions.initps();
   // End final custom actions code
 
   runApp(const MyApp());

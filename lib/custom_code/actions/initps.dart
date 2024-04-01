@@ -7,15 +7,39 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-// Set your action name, define your arguments and return parameter,
-// and then add the boilerplate code using the green button on the right!
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:powersync/powersync.dart' as powersync;
 
-late powersync.PowerSyncDatabase db;
+/**************************************************************
+               
+               POWERSYNC SETUP INSTRUCTIONS 
+               
+**************************************************************/
 
-const bool kIsWeb = bool.fromEnvironment('dart.library.js_util');
+//STEP 1: Replace this with your PowerSync instance URL. See here for instructions https://docs.powersync.com/integration-guides/supabase-+-powersync#test-everything-using-our-demo-app
+const PowerSyncEndpoint = 'notavalidURL';
+
+//STEP 2: Paste your PowerSync Client Schema here.
+//We recommend generating this from the dashboard using the "Generate client-side schema" action https://docs.powersync.com/usage/tools/powersync-dashboard#actions
+const powersync.Schema schema = powersync.Schema([
+  powersync.Table('lists', [
+    powersync.Column.text('created_at'),
+    powersync.Column.text('name'),
+    powersync.Column.text('owner_id')
+  ]),
+  powersync.Table('todos', [
+    powersync.Column.text('created_at'),
+    powersync.Column.text('completed_at'),
+    powersync.Column.text('description'),
+    powersync.Column.integer('completed'),
+    powersync.Column.text('created_by'),
+    powersync.Column.text('completed_by'),
+    powersync.Column.text('list_id')
+  ])
+]);
+
+late powersync.PowerSyncDatabase db;
 
 /// Postgres Response codes that we cannot recover from by retrying.
 final List<RegExp> fatalResponseCodes = [
@@ -52,8 +76,7 @@ class SupabaseConnector extends powersync.PowerSyncBackendConnector {
     final token = session.accessToken;
 
     return powersync.PowerSyncCredentials(
-        endpoint: 'https://659c4a069113052073717700.powersync.journeyapps.com',
-        token: token);
+        endpoint: PowerSyncEndpoint, token: token);
   }
 
   @override
@@ -132,30 +155,11 @@ bool isLoggedIn() {
   return Supabase.instance.client.auth.currentSession?.accessToken != null;
 }
 
-Future setupPowerSync() async {
-  powersync.Schema schema = powersync.Schema(([
-    const powersync.Table('todos', [
-      powersync.Column.text('list_id'),
-      powersync.Column.text('created_at'),
-      powersync.Column.text('completed_at'),
-      powersync.Column.text('description'),
-      powersync.Column.integer('completed'),
-      powersync.Column.text('created_by'),
-      powersync.Column.text('completed_by'),
-    ]),
-    const powersync.Table('lists', [
-      powersync.Column.text('created_at'),
-      powersync.Column.text('name'),
-      powersync.Column.text('owner_id')
-    ])
-  ]));
-
+Future initps() async {
   db = powersync.PowerSyncDatabase(
       schema: schema, path: await getDatabasePath());
 
   await db.initialize();
-
-  //await SupaFlow.initialize();
 
   //insert some dummy data
   final insertResult = await db.execute(
@@ -195,5 +199,5 @@ Future setupPowerSync() async {
 
 Future<String> getDatabasePath() async {
   final dir = await getApplicationSupportDirectory();
-  return join(dir.path, 'powersync-demo2.db');
+  return join(dir.path, 'powersync-database.db');
 }
