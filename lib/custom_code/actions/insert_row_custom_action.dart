@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import '/custom_code/actions/initps.dart';
+import '/custom_code/actions/initpowersync.dart';
 import 'package:powersync/powersync.dart' as powersync;
 
 Future insertRowCustomAction(String field) async {

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:powersync/powersync.dart' as powersync;
-import '/custom_code/actions/initps.dart';
+import '/custom_code/actions/initpowersync.dart';
 import '/backend/supabase/database/tables/lists.dart';
 
 Future<List<ListsRow>> readAllLists() async {

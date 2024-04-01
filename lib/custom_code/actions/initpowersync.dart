@@ -155,7 +155,7 @@ bool isLoggedIn() {
   return Supabase.instance.client.auth.currentSession?.accessToken != null;
 }
 
-Future initps() async {
+Future initpowersync() async {
   db = powersync.PowerSyncDatabase(
       schema: schema, path: await getDatabasePath());
 
