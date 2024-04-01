@@ -7,11 +7,11 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
 
   final unfocusNode = FocusNode();
   // Stores action output result for [Custom Action - newCustomAction] action in Button widget.
-  List<dynamic>? customActionOutput;
-  // Stores action output result for [Custom Action - custAct2] action in Button widget.
-  String? custActOut;
-  // Stores action output result for [Custom Action - isLoggedIn] action in Button widget.
-  String? isLoggedIn;
+  List<dynamic>? customOutput;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
 
   @override
   void initState(BuildContext context) {}
@@ -19,5 +19,7 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
+    textFieldFocusNode?.dispose();
+    textController?.dispose();
   }
 }

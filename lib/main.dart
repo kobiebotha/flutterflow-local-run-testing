@@ -17,13 +17,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
 
-  // Start initial custom actions code
-  await actions.setupPowerSync();
-  // End initial custom actions code
-
   await SupaFlow.initialize();
 
   await FlutterFlowTheme.initialize();
+
+  // Start final custom actions code
+  await actions.setupPowerSync();
+  // End final custom actions code
 
   runApp(const MyApp());
 }

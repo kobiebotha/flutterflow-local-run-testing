@@ -7,12 +7,15 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import '/custom_code/actions/setup_power_sync.dart';
 import 'package:powersync/powersync.dart' as powersync;
-import './custom_code/actions/setup_power_sync.dart';
 
-Future<List<dynamic>> newCustomAction() async {
-  final results = (await db.getAll('SELECT * from lists'));
+const bool kIsWeb = bool.fromEnvironment('dart.library.js_util');
 
-  //return results.map((row) => row.cast());
-  return results;
+Future insertRowsCustomAction(String field) async {
+  final insertResult = await db.execute(
+      'INSERT INTO lists(id, created_at, name) VALUES(uuid(), datetime(), ?) RETURNING *',
+      [field]);
+
+  return;
 }
