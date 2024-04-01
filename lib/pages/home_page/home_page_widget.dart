@@ -194,7 +194,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ),
               Builder(
                 builder: (context) {
-                  final mylist = _model.customOutput!.toList();
+                  final mylist = _model.customOutput
+                          ?.map((e) => getJsonField(
+                                e,
+                                r'''$.name''',
+                              ))
+                          .toList()
+                          .toList() ??
+                      [];
                   return ListView.builder(
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,

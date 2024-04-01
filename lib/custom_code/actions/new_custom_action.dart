@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:powersync/powersync.dart' as powersync;
-import './custom_code/actions/setup_power_sync.dart';
+import '/custom_code/actions/setup_power_sync.dart';
 
 Future<List<dynamic>> newCustomAction() async {
   final results = (await db.getAll('SELECT * from lists'));
