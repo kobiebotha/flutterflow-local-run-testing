@@ -14,7 +14,7 @@ import '/custom_code/actions/initpowersync.dart';
 Future<String> listenCA(Future Function() callback) async {
   var stream = db.watch('SELECT * FROM lists');
   stream.listen((data) {
-    print("change received from Supabase 3");
+    print("change received from Supabase 4");
     callback();
   });
   return "foo";
