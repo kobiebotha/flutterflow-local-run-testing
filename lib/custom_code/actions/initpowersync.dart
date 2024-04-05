@@ -19,7 +19,8 @@ import 'package:powersync/powersync.dart' as powersync;
 
 //STEP 1: Replace this with your PowerSync instance URL. See here for instructions https://docs.powersync.com/integration-guides/supabase-+-powersync#test-everything-using-our-demo-app
 // The URL should look like this: https://12345678901234566.powersync.journeyapps.com
-const PowerSyncEndpoint = 'insertYourURLhere';
+const PowerSyncEndpoint =
+    'https://659c4a069113052073717700.powersync.journeyapps.com';
 
 //STEP 2: Paste your PowerSync Client Schema here.
 //We recommend generating this from the dashboard using the "Generate client-side schema" action https://docs.powersync.com/usage/tools/powersync-dashboard#actions
